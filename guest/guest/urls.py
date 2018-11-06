@@ -35,4 +35,5 @@ urlpatterns = [
     path('logout/',views.logout),
     path('api/',include('sign.urls',namespace='sign'))
 
+
 ]

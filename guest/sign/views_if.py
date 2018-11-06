@@ -12,8 +12,8 @@ def add_event(request):
     address = request.POST.get('address','')     #地址
     start_time = request.POST.get('start_time','')#发布会时间
     print(eid,name)
-    #if eid=='' or name== '' or limit=='' or address=='' or start_time == '':
-     #   return JsonResponse({'status':10021,'message':'parameter error'})
+    if eid=='' or name== '' or limit=='' or address=='' or start_time == '':
+        return JsonResponse({'status':10021,'message':'parameter error'})
 
     result = Event.objects.filter(id=eid)
     if result:
@@ -33,7 +33,7 @@ def add_event(request):
         Event.objects.create(id=eid,name=name,limit=limit,address=address,status=int(status),start_time=start_time)
     except ValidationError as e:
         error = 'start_time format error.It must be in YYYY-MM-DD HH:MM:SS format.'
-        return JsonResponse({'status':'10024','message':error})
+        return JsonResponse({'status':10024,'message':error})
 
     return JsonResponse({'status':200,'message':'add event success'})
 
